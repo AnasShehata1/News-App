@@ -1,69 +1,17 @@
-import 'dart:convert';
 import 'dart:developer';
 
-import 'package:flutter/widgets.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 class Api {
-  Future<dynamic> get({required String url, String? token}) async {
-    Map<String, String> headers = {};
-
-    if (token != null) {
-      headers.addAll({
-        'Authorization': 'Bearer $token',
-      });
-    }
-    http.Response response = await http.get(Uri.parse(url), headers: headers);
+  final dio = Dio();
+  Future<Map<String,dynamic>> get({required String url}) async {
+    Response response = await dio.get(url);
+    log('response code ${response.statusCode.toString()}');
     if (response.statusCode == 200) {
-      // Map<String, String> data = jsonDecode(response.body);
-      return jsonDecode(response.body);
+      return response.data as Map<String,dynamic>;
     } else {
       throw Exception(
-          'there is a problem with status code ${response.statusCode}\n and body ${jsonDecode(response.body)}');
-    }
-  }
-
-  Future<dynamic> post(
-      {required String url, @required dynamic body, String? token}) async {
-    Map<String, String> headers = {};
-    if (token != null) {
-      headers.addAll({
-        'Authorization': 'Bearer $token',
-      });
-    }
-    http.Response response =
-        await http.post(Uri.parse(url), body: body, headers: headers);
-    if (response.statusCode == 200) {
-      var encode = jsonEncode(response.body);
-      Map<String, dynamic> data = jsonDecode(encode);
-
-      return data;
-    } else {
-      throw Exception(
-          'there is a problem with status code ${response.statusCode}\n and body ${jsonDecode(response.body)}');
-    }
-  }
-
-  Future<dynamic> put(
-      {required String url, @required dynamic body, String? token}) async {
-    Map<String, String> headers = {};
-    headers.addAll({'Content-Type': 'application/x-www-form-urlencoded'});
-    if (token != null) {
-      headers.addAll({
-        'Authorization': 'Bearer $token',
-      });
-    }
-    log('URL: $url \n BODY: $body \n TOKEN: $token');
-    http.Response response =
-        await http.post(Uri.parse(url), body: body, headers: headers);
-    if (response.statusCode == 200) {
-      var encode = jsonEncode(response.body);
-      Map<String, dynamic> data = jsonDecode(encode);
-      log(data.toString());
-      return data;
-    } else {
-      throw Exception(
-          'there is a problem with status code ${response.statusCode}\n and body $jsonDecode(encode)}');
+          'there is a problem with status code ${response.statusCode}\n');
     }
   }
 }

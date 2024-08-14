@@ -39,12 +39,14 @@ class NewsView extends StatelessWidget {
             const SizedBox(height: 8),
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: Image.network(
-                article.image,
-                height: 200,
-                width: double.infinity,
-                fit: BoxFit.fill,
-              ),
+              child: article.image != null
+                  ? Image.network(
+                      article.image!,
+                      height: 200,
+                      width: double.infinity,
+                      fit: BoxFit.fill,
+                    )
+                  : Image.asset('assets/failed.png'),
             ),
             const SizedBox(height: 12),
             Text(
@@ -57,7 +59,7 @@ class NewsView extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              article.description,
+              article.description ?? '',
               style: const TextStyle(
                 color: Colors.grey,
                 fontWeight: FontWeight.w500,

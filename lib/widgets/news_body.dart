@@ -10,23 +10,20 @@ class NewsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-      child: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: CategoriesListView(),
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: CategoriesListView(),
+        ),
+        const SliverToBoxAdapter(
+          child: SizedBox(
+            height: 20,
           ),
-          const SliverToBoxAdapter(
-            child: SizedBox(
-              height: 20,
-            ),
-          ),
-          const NewsListViewBuilder(
-            category: 'general',
-          ),
-        ],
-      ),
+        ),
+        const NewsListViewBuilder(
+          category: 'general',
+        ),
+      ],
     );
   }
 }

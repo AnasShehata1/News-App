@@ -1,15 +1,15 @@
 class ArticleModel {
   final String author;
   final String title;
-  final String description;
-  final String image;
+  final String? description;
+  final String? image;
   final String publishedAt;
   
   ArticleModel(
       {required this.author,
       required this.title,
-      required this.description,
-      required this.image,
+       this.description,
+       this.image,
       required this.publishedAt});
   factory ArticleModel.fromJson(json){
     return ArticleModel(

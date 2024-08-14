@@ -20,17 +20,19 @@ class NewsTile extends StatelessWidget {
         );
       },
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 20.0),
+        padding: const EdgeInsets.only(bottom: 20.0, right: 12, left: 12),
         child: Column(
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: Image.network(
-                articleModel.image,
-                height: 200,
-                width: double.infinity,
-                fit: BoxFit.fill,
-              ),
+              child: articleModel.image != null
+                  ? Image.network(
+                      articleModel.image!,
+                      height: 200,
+                      width: double.infinity,
+                      fit: BoxFit.fill,
+                    )
+                  : Image.asset('assets/failed.png'),
             ),
             const SizedBox(height: 12),
             Text(
@@ -45,7 +47,7 @@ class NewsTile extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              articleModel.description,
+              articleModel.description ?? '',
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
