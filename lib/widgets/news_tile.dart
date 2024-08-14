@@ -12,13 +12,15 @@ class NewsTile extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) {
-              return NewsView(article:articleModel ,);
+              return NewsView(
+                article: articleModel,
+              );
             },
           ),
         );
       },
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 20.0, right: 10.0, left: 10.0),
+        padding: const EdgeInsets.only(bottom: 20.0),
         child: Column(
           children: [
             ClipRRect(
