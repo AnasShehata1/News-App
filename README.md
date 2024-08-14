@@ -1,6 +1,6 @@
-# newsapp
+# News App
 
-A new Flutter project.
+A new Flutter project about News using Api, clean code, simple UI
 
 ## Getting Started
 
