@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newsapp/models/article_model.dart';
+import 'package:newsapp/widgets/custom_appbar.dart';
+import 'package:newsapp/widgets/custom_loading_widget.dart';
 
 class NewsView extends StatelessWidget {
   const NewsView({super.key, required this.article});
@@ -10,19 +12,7 @@ class NewsView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title:
-            const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Text('News',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold)),
-          Text('Cloud',
-              style: TextStyle(
-                  color: Colors.amber,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold)),
-        ]),
+        title: const CustomAppBar(),
       ),
       body: Padding(
         padding: const EdgeInsets.only(bottom: 20.0, right: 10.0, left: 10.0),
@@ -46,7 +36,7 @@ class NewsView extends StatelessWidget {
                       width: double.infinity,
                       fit: BoxFit.fill,
                     )
-                  : Image.asset('assets/failed.png'),
+                  : const CustomLoading(),
             ),
             const SizedBox(height: 12),
             Text(

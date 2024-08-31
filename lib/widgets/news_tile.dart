@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newsapp/models/article_model.dart';
 import 'package:newsapp/views/news_view.dart';
+import 'package:newsapp/widgets/custom_loading_widget.dart';
 
 class NewsTile extends StatelessWidget {
   const NewsTile({super.key, required this.articleModel});
@@ -32,7 +33,7 @@ class NewsTile extends StatelessWidget {
                       width: double.infinity,
                       fit: BoxFit.fill,
                     )
-                  : Image.asset('assets/failed.png'),
+                  : const CustomLoading(),
             ),
             const SizedBox(height: 12),
             Text(
